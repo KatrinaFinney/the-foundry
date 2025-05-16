@@ -152,7 +152,7 @@ export default function ContactForm({
               </button>
 
               <p className={styles.postSubmitNote}>
-                Once you submit your request, we’ll review your details and follow up within 1–2 business days.
+                Once you submit your request, we’ll review your details and follow up within 2 business days.
                 From there, we’ll guide you through next steps — whether that’s scheduling a discovery call or preparing your project roadmap.
                 We believe every build starts with clear communication and thoughtful planning.
               </p>
