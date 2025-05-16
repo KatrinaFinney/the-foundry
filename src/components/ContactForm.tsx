@@ -1,33 +1,52 @@
 'use client';
 
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import styles from './ContactForm.module.css';
 
-export default function ContactForm({ onClose }: { onClose: () => void }) {
+export default function ContactForm({
+  onClose,
+  selectedPackage,
+}: {
+  onClose: () => void;
+  selectedPackage: string | null;
+}) {
   const [formData, setFormData] = useState({
     name: '',
     email: '',
     business: '',
-    package: '',
+    package: selectedPackage || '',
     message: '',
   });
 
   const [submitted, setSubmitted] = useState(false);
 
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
+  const handleChange = (
+    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>
+  ) => {
     const { name, value } = e.target;
     setFormData((prev) => ({ ...prev, [name]: value }));
   };
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+  
+    if (!formData.name || !formData.email || !formData.message) {
+      alert('Please complete all required fields.');
+      return;
+    }
+  
+    if (!formData.email.includes('@')) {
+      alert('Please enter a valid email address.');
+      return;
+    }
+  
     try {
       const res = await fetch('/api/submit', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(formData),
       });
-
+  
       if (!res.ok) throw new Error('Submission failed');
       setSubmitted(true);
     } catch (err) {
@@ -35,57 +54,117 @@ export default function ContactForm({ onClose }: { onClose: () => void }) {
       console.error(err);
     }
   };
+  
+
+  // Lock scroll when modal is open
+  useEffect(() => {
+    document.body.style.overflow = 'hidden';
+    return () => {
+      document.body.style.overflow = 'auto';
+    };
+  }, []);
 
   return (
     <div className={styles.overlay}>
       <div className={styles.modal}>
-        <button onClick={onClose} className={styles.close}>✕</button>
+        <button
+          onClick={onClose}
+          className={styles.closeButton}
+          aria-label="Close contact form"
+        >
+          ×
+        </button>
 
         {!submitted ? (
           <>
             <h2 className={styles.heading}>Start Your Build</h2>
+
             <form className={styles.form} onSubmit={handleSubmit}>
               <div className={styles.field}>
-                <label>Name<span>*</span></label>
-                <input name="name" required value={formData.name} onChange={handleChange} />
+                <label htmlFor="name">Your Name<span>*</span></label>
+                <input
+                  id="name"
+                  name="name"
+                  type="text"
+                  required
+                  placeholder="Jane Doe"
+                  value={formData.name}
+                  onChange={handleChange}
+                />
               </div>
 
               <div className={styles.field}>
-                <label>Email<span>*</span></label>
-                <input type="email" name="email" required value={formData.email} onChange={handleChange} />
+                <label htmlFor="email">Email Address<span>*</span></label>
+                <input
+                  id="email"
+                  name="email"
+                  type="email"
+                  required
+                  placeholder="you@yourdomain.com"
+                  value={formData.email}
+                  onChange={handleChange}
+                />
               </div>
 
               <div className={styles.field}>
-                <label>Business / Project Name</label>
-                <input name="business" value={formData.business} onChange={handleChange} />
+                <label htmlFor="business">Business or Project Name</label>
+                <input
+                  id="business"
+                  name="business"
+                  type="text"
+                  placeholder="Studio Evergreen"
+                  value={formData.business}
+                  onChange={handleChange}
+                />
               </div>
 
               <div className={styles.field}>
-                <label>Which Package?</label>
-                <select name="package" value={formData.package} onChange={handleChange}>
-                  <option value="">Select a package</option>
-                  <option value="The Spark Site">$499 – The Spark Site</option>
-                  <option value="The Foundation Site">$999 – The Foundation Site</option>
-                  <option value="The Signature Site">$1499 – The Signature Site</option>
-                  <option value="The Scalable Site">$1999 – The Scalable Site</option>
+                <label htmlFor="package">Select a Package</label>
+                <select
+                  id="package"
+                  name="package"
+                  value={formData.package}
+                  onChange={handleChange}
+                >
+                  <option value="">Choose a package</option>
+                  <option value="The Spark Site">The Spark Site – $499</option>
+                  <option value="The Foundation Site">The Foundation Site – $999</option>
+                  <option value="The Signature Site">The Signature Site – $1499</option>
+                  <option value="The Scaffold">The Scaffold – $1999</option>
                 </select>
               </div>
 
               <div className={styles.field}>
-                <label>Project Details<span>*</span></label>
-                <textarea name="message" required rows={4} value={formData.message} onChange={handleChange} />
+                <label htmlFor="message">Tell us what you're building<span>*</span></label>
+                <textarea
+                  id="message"
+                  name="message"
+                  required
+                  placeholder="Share a bit about your vision, timeline, or any questions."
+                  rows={5}
+                  value={formData.message}
+                  onChange={handleChange}
+                />
               </div>
 
               <button type="submit" className={styles.submitButton}>
-                Submit
+                Send My Request
               </button>
+
+              <p className={styles.postSubmitNote}>
+                Once you submit your request, we’ll review your details and follow up within 1–2 business days.
+                From there, we’ll guide you through next steps — whether that’s scheduling a discovery call or preparing your project roadmap.
+                We believe every build starts with clear communication and thoughtful planning.
+              </p>
             </form>
           </>
         ) : (
           <div className={styles.thankyou}>
             <h2>Thank You!</h2>
             <p>We’ll be in touch shortly to begin planning your build.</p>
-            <button className={styles.submitButton} onClick={onClose}>Close</button>
+            <button className={styles.submitButton} onClick={onClose}>
+              Close
+            </button>
           </div>
         )}
       </div>

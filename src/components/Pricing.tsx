@@ -1,71 +1,97 @@
+'use client';
+
+import { motion } from 'framer-motion';
 import styles from './Pricing.module.css';
 
 const packages = [
   {
-    name: "The Spark Site",
+    name: "The Spark",
     price: "$499",
-    summary: "A clean, confident starter site for solo founders or side projects.",
+    summary: "A confident digital debut that gives your brand a professional presence—perfect for launching bold ideas with clarity and speed.",
     features: [
-      "1–3 responsive pages",
-      "Mobile-first design",
-      "Basic SEO setup",
-      "Launch-ready on your domain"
+      "Up to 3 responsive sections or pages",
+      "Your logo, brand colors & message",
+      "Mobile-optimized layout",
+      "Delivered ready to launch"
     ],
   },
   {
-    name: "The Foundation Site",
+    name: "The Foundation",
     price: "$999",
-    summary: "A strategic build with more space to tell your story.",
+    summary: "A strategic site with room to grow—designed to build trust, guide users, and elevate your brand above the noise.",
     features: [
-      "Up to 6 custom pages",
-      "Contact/intake form",
-      "Starter SEO & analytics",
-      "Flexible platform options"
+      "Up to 6 pages (Home, About, Services, Contact, etc.)",
+      "Fully responsive & SEO-ready",
+      "Contact or inquiry form setup",
+      "One revision round included"
     ],
   },
   {
-    name: "The Signature Site",
+    name: "The Signature",
     price: "$1,499",
-    summary: "Built to convert — with blog, lead capture & polish.",
+    summary: "Your business deserves more than a template—this premium build balances beauty, strategy, and performance to help you scale.",
     features: [
-      "Up to 10 pages + blog",
-      "Lead capture integration",
-      "Performance optimization",
-      "Training call or handoff video"
+      "Up to 10 custom pages + simple blog setup",
+      "Lead capture or newsletter integration",
+      "On-brand animations & CTAs",
+      "Walkthrough video or training call"
     ],
   },
   {
-    name: "The Scalable Site",
+    name: "The Scaffold",
     price: "$1,999",
-    summary: "Booking, ecom, or gated content — ready to grow with you.",
+    summary: "An adaptable, scalable, conversion-ready system for growing brands—ideal for scheduling, eCommerce, and launching your next big move.",
     features: [
       "Everything in Signature",
-      "Ecommerce or scheduling features",
-      "3-month support buffer",
-      "Custom domain email setup"
+      "Booking system or eCommerce (1–5 products)",
+      "Custom email setup (with domain)",
+      "3 months of light support"
     ],
   },
 ];
 
-export default function Pricing({ onCTAClick }: { onCTAClick: () => void }) {
+export default function Pricing({
+  onStartIntake,
+}: {
+  onStartIntake: (pkgName: string) => void;
+}) {
   return (
     <section className={styles.pricing}>
-      <h2 className={styles.heading}>Packages & Pricing</h2>
+      <motion.h2
+        className={styles.heading}
+        initial={{ opacity: 0, y: 20 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.8, ease: 'easeOut' }}
+        viewport={{ once: true }}
+      >
+        Choose Your Build
+      </motion.h2>
+
       <div className={styles.grid}>
-        {packages.map((pkg, idx) => (
-          <div key={idx} className={styles.card}>
-            <h3 className={styles.name}>{pkg.name}</h3>
-            <p className={styles.price}>{pkg.price}</p>
+        {packages.map((pkg, i) => (
+          <motion.div
+            key={pkg.name}
+            className={styles.card}
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, delay: i * 0.1, ease: 'easeOut' }}
+            viewport={{ once: true }}
+          >
+            <h3 className={styles.title}>{pkg.name}</h3>
             <p className={styles.summary}>{pkg.summary}</p>
+            <div className={styles.price}>{pkg.price}</div>
             <ul className={styles.features}>
-              {pkg.features.map((feat, i) => (
-                <li key={i}>{feat}</li>
+              {pkg.features.map((feature, index) => (
+                <li key={index}>{feature}</li>
               ))}
             </ul>
-            <button className={styles.selectButton} onClick={onCTAClick}>
+            <button
+              className={styles.selectButton}
+              onClick={() => onStartIntake(pkg.name)}
+            >
               Start with {pkg.name}
             </button>
-          </div>
+          </motion.div>
         ))}
       </div>
     </section>

@@ -9,8 +9,7 @@
 body {
   background-color: var(--bg);
   color: var(--text);
-  margin: 0;
-  font-family: var(--font-space-grotesk), sans-serif;
+  font-family: var(--font-worksans);
   line-height: 1.7;
   font-size: 1.1rem;  /* bigger base text */
 }

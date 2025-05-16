@@ -1,20 +1,34 @@
 'use client';
 
+import { useState } from 'react';
 import Hero from '@/components/Hero';
 import Pricing from '@/components/Pricing';
 import CTA from '@/components/CTA';
 import ContactForm from '@/components/ContactForm';
-import { useState } from 'react';
 
 export default function HomePage() {
-  const [showForm, setShowForm] = useState(false);
+  const [selectedPackage, setSelectedPackage] = useState<string | null>(null);
+  const [isFormOpen, setIsFormOpen] = useState(false);
 
   return (
     <>
-      <Hero onCTAClick={() => setShowForm(true)} />
-      <Pricing onCTAClick={() => setShowForm(true)} />
-      <CTA onCTAClick={() => setShowForm(true)} />
-      {showForm && <ContactForm onClose={() => setShowForm(false)} />}
+      <Hero onCTAClick={() => setIsFormOpen(true)} />
+
+      <Pricing
+        onStartIntake={(pkgName) => {
+          setSelectedPackage(pkgName);
+          setIsFormOpen(true);
+        }}
+      />
+
+      <CTA onCTAClick={() => setIsFormOpen(true)} />
+
+      {isFormOpen && (
+        <ContactForm
+          onClose={() => setIsFormOpen(false)}
+          selectedPackage={selectedPackage}
+        />
+      )}
     </>
   );
 }

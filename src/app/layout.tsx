@@ -1,5 +1,7 @@
 import './globals.css';
-import { spaceGrotesk, ibmPlexMono } from '@/styles/fonts';
+import { cormorant, workSans } from '@/styles/fonts';
+import Footer from '@/components/Footer';
+
 
 export const metadata = {
   title: 'The Foundry – by WebTriage',
@@ -11,7 +13,7 @@ export const metadata = {
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="en" className={`${spaceGrotesk.variable} ${ibmPlexMono.variable}`}>
+    <html lang="en" className={`${cormorant.variable} ${workSans.variable}`}>
       <head>
         <link
           rel="preload"
@@ -20,7 +22,11 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           type="image/jpeg"
         />
       </head>
-      <body>{children}</body>
+      <body>
+        {children}
+        <Footer/>
+      </body>
+      
     </html>
   );
 }
