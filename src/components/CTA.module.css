@@ -1,14 +1,37 @@
 .cta {
-    background-color: rgba(35, 28, 25, 0.85);
+    position: relative;
+    background-color: rgba(20, 15, 13, 0.75); /* base espresso tint */
     border-radius: 1rem;
     padding: 4rem 2rem;
     text-align: center;
     color: #f5f2ef;
-    backdrop-filter: blur(2px);
-    -webkit-backdrop-filter: blur(2px);
-    box-shadow: 0 1px 6px rgba(0, 0, 0, 0.15);
-    transition: background 0.3s ease;
+    backdrop-filter: blur(4px);
+    -webkit-backdrop-filter: blur(4px);
+    overflow: hidden; /* important for blend layer containment */
   }
+  
+  /* ✨ Overlay Layer */
+  .cta::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background-image: url('/images/espresso-overlay.png');
+    background-size: cover;
+    background-repeat: no-repeat;
+    mix-blend-mode: multiply;
+    opacity: 0.5;
+    pointer-events: none;
+    z-index: 0;
+  }
+  
+  
+  /* Content on top */
+  .cta > * {
+    position: relative;
+    z-index: 1;
+  }
+  
+
   
   .heading {
     font-family: var(--font-cormorant);
@@ -34,15 +57,21 @@
     font-weight: 600;
     background-color: var(--bg);
     color: var(--text);
-    padding: 0.85rem 1.5rem;
-    border: none;
-    border-radius: 6px;
+    padding: 0.9rem 1.75rem;
+    border: 1px solid var(--text);
+    border-radius: 8px;
     cursor: pointer;
-    transition: background 0.2s ease-in-out, transform 0.2s ease;
+    margin-top: 1.5rem;
+    transition: 
+      background-color 0.25s ease,
+      transform 0.2s ease,
+      border-color 0.25s ease;
   }
   
   .ctaButton:hover {
     background-color: #f0eae2;
-    transform: scale(1.03);
+    border-color: #e0d7cd;
+    transform: scale(1.04);
   }
+  
   
