@@ -9,7 +9,7 @@ export default function Hero({ onCTAClick }: { onCTAClick: () => void }) {
 </Link>
 
       <div className={styles.container}>
-        <h1 className={styles.headline}>Built to represent you well.</h1>
+        <h1 className={styles.headline}>Solid websites start here.</h1>
         <p className={styles.subtext}>
           The Foundry by WebTriage helps bold brands bring their digital identity to life.
           Thoughtfully designed. Strategically built.
