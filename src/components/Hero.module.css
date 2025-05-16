@@ -1,0 +1,142 @@
+.hero {
+    position: relative;
+    min-height: 70vh;
+    padding: 6rem 2rem;
+    text-align: center;
+    color: #fff;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+  }
+  
+  .hero::before,
+  .hero::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    z-index: -2;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    transition: opacity 0.6s ease-out;
+  }
+  
+  /* Blurred background */
+  .hero::before {
+    background-image: url('/images/foundry-hero-blur.jpg');
+    filter: blur(12px);
+    opacity: 1;
+    background-color: rgba(0, 0, 0, 0.55);
+  }
+  
+  /* Compressed background */
+  .hero::after {
+    background-image: url('/images/foundry-hero-compressed.jpg');
+    opacity: 0;
+    animation: reveal-bg 0.6s forwards 0.2s;
+  }
+  
+  @keyframes reveal-bg {
+    to {
+      opacity: 1;
+    }
+  }
+  
+  .headline {
+    font-size: 2.5rem;
+    font-weight: 700;
+    margin-bottom: 1rem;
+    color: #fff;
+    opacity: 0;
+    transform: translateY(20px);
+    animation: fadeInUp 0.8s ease-out 0.3s forwards;
+  }
+  
+  .subtext {
+    font-size: 1.2rem;
+    color: #f2f2f2;
+    max-width: 600px;
+    margin: 0 auto 2rem auto;
+    opacity: 0;
+    transform: translateY(20px);
+    animation: fadeInUp 1s ease-out 0.6s forwards;
+  }
+  
+  @keyframes fadeInUp {
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+  
+  /* Responsive tweaks */
+  @media (max-width: 768px) {
+    .hero {
+      padding: 4rem 1.5rem;
+    }
+  
+    .headline {
+      font-size: 2rem;
+    }
+  
+    .subtext {
+      font-size: 1rem;
+      padding: 0 0.5rem;
+    }
+  }
+  
+  @media (max-width: 480px) {
+    .headline {
+      font-size: 1.75rem;
+    }
+  
+    .subtext {
+      font-size: 0.95rem;
+    }
+  }
+  
+  
+  
+  .container {
+    max-width: 800px;
+    margin: 0 auto;
+  }
+  
+  .headline {
+    font-size: 2.5rem;
+    font-weight: 700;
+    margin-bottom: 1rem;
+    color: #fff;
+  }
+  
+  .subtext {
+    font-size: 1.2rem;
+    line-height: 1.6;
+    margin-bottom: 2rem;
+    color: #e0e0e0;
+  }
+  
+  .ctaButton {
+    background-color: var(--accent);
+    color: var(--bg);
+    font-size: 1rem;
+    font-weight: 600;
+    padding: 0.75rem 1.5rem;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: background 0.2s ease-in-out;
+  }
+  
+  .ctaButton:hover {
+    background-color: var(--accent-hover);
+  }
+  .ctaButton,
+.submitButton,
+.selectButton {
+  font-size: 1.05rem;
+  font-weight: 700;
+  padding: 0.85rem 1.5rem;
+}

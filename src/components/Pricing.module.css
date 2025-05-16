@@ -1,0 +1,71 @@
+.pricing {
+    padding: 4rem 2rem;
+    background-color: #f7f4f0;
+    text-align: center;
+  }
+  
+  .heading {
+    font-size: 2rem;
+    font-weight: 700;
+    margin-bottom: 3rem;
+  }
+  
+  .grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 2rem;
+    max-width: 1100px;
+    margin: 0 auto;
+  }
+  
+  .card {
+    background: #fff;
+    border: 1px solid #e0dcd5;
+    padding: 2rem;
+    border-radius: 8px;
+    text-align: left;
+  }
+  
+  .name {
+    font-size: 1.25rem;
+    font-weight: 600;
+    margin-bottom: 0.25rem;
+  }
+  
+  .price {
+    font-size: 1.2rem;
+    font-weight: 500;
+    color: var(--accent);
+    margin-bottom: 0.5rem;
+  }
+  
+  .summary {
+    font-size: 1rem;
+    color: #555;
+    margin-bottom: 1rem;
+  }
+  
+  .features {
+    padding-left: 1rem;
+    margin-bottom: 1.5rem;
+  }
+  
+  .features li {
+    margin-bottom: 0.5rem;
+  }
+  
+  .selectButton {
+    background-color: var(--accent);
+    color: var(--bg);
+    font-weight: 600;
+    padding: 0.5rem 1.25rem;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 0.95rem;
+  }
+  
+  .selectButton:hover {
+    background-color: var(--accent-hover);
+  }
+  
