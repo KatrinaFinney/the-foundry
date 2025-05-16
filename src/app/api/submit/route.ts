@@ -47,7 +47,7 @@ export async function POST(req: Request) {
 
     // ✉️ Send thank-you email to user
     await resend.emails.send({
-      from: 'The Foundry <hello@webtriage.pro>',
+      from: 'The Foundry <build@webtriage.pro>',
       to: [body.email],
       subject: `We’ve received your request — thank you!`,
       html: `
