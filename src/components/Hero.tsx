@@ -1,11 +1,12 @@
+import Link from 'next/link';
 import styles from './Hero.module.css';
 
 export default function Hero({ onCTAClick }: { onCTAClick: () => void }) {
   return (
     <section className={styles.hero}>
-            <a href="/" className={styles.brandmark}>
+            <Link href="/" className={styles.brandmark}>
   The Foundry
-</a>
+</Link>
 
       <div className={styles.container}>
         <h1 className={styles.headline}>Built to represent you well.</h1>

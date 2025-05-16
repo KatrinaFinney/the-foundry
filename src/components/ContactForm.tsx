@@ -135,7 +135,7 @@ export default function ContactForm({
               </div>
 
               <div className={styles.field}>
-                <label htmlFor="message">Tell us what you're building<span>*</span></label>
+                <label htmlFor="message">Tell us what you&rsquo;re building<span>*</span></label>
                 <textarea
                   id="message"
                   name="message"
